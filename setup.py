@@ -126,6 +126,7 @@ HERE = Path(__file__).resolve().parent
 version = re.search(r'__version__ = "(.*?)"', (HERE / "chatglm_cpp/__init__.py").read_text(encoding="utf-8")).group(1)
 
 setup(
+    name="chatglm_cpp",
     version=version,
     packages=find_packages(),
     ext_modules=[CMakeExtension("chatglm_cpp._C")],
