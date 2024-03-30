@@ -53,6 +53,7 @@ class CMakeBuild(build_ext):
             f"-DCHATGLM_ENABLE_PYBIND=ON",
             f"-DCHATGLM_ENABLE_EXAMPLES=OFF",
             f"-DBUILD_SHARED_LIBS=OFF",
+            f"-DGGML_CUBLAS=ON",
         ]
         build_args = []
         # Adding CMake arguments set as environment variable
