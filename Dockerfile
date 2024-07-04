@@ -2,7 +2,9 @@ ARG BASE_IMAGE=ubuntu:20.04
 
 FROM ${BASE_IMAGE} AS build
 
-ARG CMAKE_ARGS="-DGGML_CUBLAS=ON"
+ARG CMAKE_ARGS="-DGGML_CUDA=ON -DGGML_CUBLAS=ON" 
+# optimize for A100
+ARG CUDA_ARCH="80"
 
 WORKDIR /chatglm.cpp
 
@@ -27,7 +29,7 @@ ADD . .
 
 # build cpp binary
 RUN \
-    cmake -B build ${CMAKE_ARGS} && \
+    cmake -B build ${CMAKE_ARGS}  -DCMAKE_CUDA_ARCHITECTURES=${CUDA_ARCH} && \
     cmake --build build -j --config Release
 
 # build python binding
